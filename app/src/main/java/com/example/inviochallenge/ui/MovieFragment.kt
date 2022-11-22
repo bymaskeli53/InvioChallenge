@@ -1,12 +1,19 @@
-package com.example.inviochallenge
+package com.example.inviochallenge.ui
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.inviochallenge.MovieViewModel
+import com.example.inviochallenge.R
 import com.example.inviochallenge.databinding.FragmentMovieBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.fragment_movie) {
+    private val viewModel: MovieViewModel by viewModels()
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
 
@@ -19,6 +26,14 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         val view = binding.root
 
         return view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+       val movies =  viewModel.getMovies()
+        @Suppress("DEPRECATION")
+        setHasOptionsMenu(true)
 
     }
 

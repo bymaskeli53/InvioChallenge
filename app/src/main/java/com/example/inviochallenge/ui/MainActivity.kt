@@ -1,10 +1,12 @@
-package com.example.inviochallenge
+package com.example.inviochallenge.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
-import com.airbnb.lottie.Lottie
+import com.example.inviochallenge.R
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

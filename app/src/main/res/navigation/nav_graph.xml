@@ -6,14 +6,17 @@
 
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.example.inviochallenge.MovieFragment"
+        android:name="com.example.inviochallenge.ui.MovieFragment"
         android:label="MovieFragment" >
         <action
             android:id="@+id/action_movieFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <argument
+            android:name="Movie"
+            app:argType="com.example.inviochallenge.Movie" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.inviochallenge.DetailsFragment"
+        android:name="com.example.inviochallenge.ui.DetailsFragment"
         android:label="DetailsFragment" />
 </navigation>
