@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_year">#0A46DF</color>
     <color name="color_category">#F44336</color>
+    <color name="color_awards">#11FF00</color>
 </resources>

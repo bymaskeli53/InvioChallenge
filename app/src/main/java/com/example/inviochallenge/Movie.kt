@@ -32,5 +32,11 @@ data class Movie(
     val imdbRating: String,
     val imdbVotes: String
 ) : Parcelable
+{
+
+    override fun toString(): String {
+        return Title
+    }
+}
 
 // serialized name kullanılacak.

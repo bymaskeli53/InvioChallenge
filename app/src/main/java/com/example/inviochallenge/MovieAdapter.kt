@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.inviochallenge.databinding.ItemMovieBinding
 
-class MovieAdapter(val movie: Movie,val context: Context): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(val movie: Movie, val context: Context,private val listener: OnItemClickListener): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(movie: Movie) {
@@ -31,9 +31,18 @@ class MovieAdapter(val movie: Movie,val context: Context): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
             val movie = movie
             holder.bind(movie)
+            holder.itemView.setOnClickListener {
+                listener.onItemClick(movie)
+            }
     }
 
-    override fun getItemCount(): Int = 1
+    override fun getItemCount(): Int {
+        return if (movie.Title != null) 1 else 0
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(movie: Movie)
+    }
 
 
 }
