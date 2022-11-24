@@ -5,6 +5,8 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.inviochallenge.Movie
+import com.example.inviochallenge.MovieAdapter
 import com.example.inviochallenge.MovieViewModel
 import com.example.inviochallenge.R
 import com.example.inviochallenge.databinding.FragmentMovieBinding
@@ -16,6 +18,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     private val viewModel: MovieViewModel by viewModels()
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +34,10 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       val movies =  viewModel.getMovies()
+        viewModel.movieLiveData.observe(viewLifecycleOwner){
+            val adapter = MovieAdapter(viewModel.movieLiveData.value!!,requireContext())
+            binding.recyclerview.adapter = adapter
+        }
         @Suppress("DEPRECATION")
         setHasOptionsMenu(true)
 
@@ -49,6 +55,12 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
             @Suppress("")
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // This will call retrofit code via viewmodel
+                binding.animationView.pauseAnimation()
+                binding.animationView.visibility = View.INVISIBLE
+                if (query != null) {
+                    viewModel.searchMovies(query)
+
+                }
                 return true
 
             }
